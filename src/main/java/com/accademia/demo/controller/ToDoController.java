@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/todo")
 public class ToDoController {
@@ -23,8 +25,8 @@ public class ToDoController {
     }
 
     @GetMapping
-    public ResponseEntity<ToDo> getAll() {
-        return (ResponseEntity) ResponseEntity.ok(toDoService.getAll());
+    public ResponseEntity<List<ToDo>> getAll() {
+        return ResponseEntity.ok(toDoService.getAll());
     }
 
     @GetMapping("/{toDoId}")
@@ -33,14 +35,14 @@ public class ToDoController {
     }
 
     @PutMapping("/{toDoId}")
-    public ResponseEntity<ToDo> update(@PathVariable int toDoId, @RequestBody boolean status) {
+    public ResponseEntity<ToDo> update(@PathVariable int toDoId, @RequestBody ToDo status) {
        return ResponseEntity.ok(toDoService.updateToDo(toDoId, status));
 
 
     }
 
-    @GetMapping("/{status}")
-    public ResponseEntity<ToDo> getAllTodoDone(@PathVariable boolean status) {
-        return (ResponseEntity) ResponseEntity.ok(toDoService.getAllDone(status));
+    @GetMapping("/tasks")
+    public ResponseEntity<List<ToDo>> getAllTodoDone(@RequestParam("done") boolean status) {
+        return  ResponseEntity.ok(toDoService.getAllDone(status));
     }
 }

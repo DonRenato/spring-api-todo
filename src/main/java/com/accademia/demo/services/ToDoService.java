@@ -28,23 +28,15 @@ public class ToDoService {
         return toDoRepository.findById(toDoId).orElseThrow();
     }
 
-    public ToDo updateToDo(int toDoId, boolean status) {
-        var todo = toDoRepository.findById(toDoId);
-        todo.map(t -> {
-            t.setDone(status);
+    public ToDo updateToDo(int toDoId, ToDo status) {
+        return toDoRepository.findById(toDoId).map(t -> {
+            t.setDone(status.getDone());
+            t.setDescription(status.getDescription());
             return toDoRepository.save(t);
-        });
-
-
-        return null;
-
-
+        }).orElseThrow();
     }
 
     public List<ToDo> getAllDone(boolean status) {
         return toDoRepository.findAllByDone(status);
-
-
-        }
     }
 }
