@@ -45,4 +45,10 @@ public class ToDoController {
     public ResponseEntity<List<ToDo>> getAllTodoDone(@RequestParam("done") boolean status) {
         return  ResponseEntity.ok(toDoService.getAllDone(status));
     }
+
+    @DeleteMapping("/{toDoId}")
+    public ResponseEntity delete(@PathVariable int toDoId) {
+        return ResponseEntity.ok(toDoService.removeToDo(toDoId));
+
+    }
 }

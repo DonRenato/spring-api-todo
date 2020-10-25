@@ -3,6 +3,7 @@ package com.accademia.demo.services;
 import com.accademia.demo.entity.ToDo;
 import com.accademia.demo.repository.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -39,4 +40,13 @@ public class ToDoService {
     public List<ToDo> getAllDone(boolean status) {
         return toDoRepository.findAllByDone(status);
     }
+
+     public ToDo removeToDo(int toDoId) {
+         return toDoRepository.findById(toDoId)
+            .map(record -> {
+            toDoRepository.delete(record);
+            return record;
+         }).orElseThrow();
+
+     }
 }
