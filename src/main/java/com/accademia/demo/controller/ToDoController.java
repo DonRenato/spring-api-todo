@@ -51,4 +51,9 @@ public class ToDoController {
         return ResponseEntity.ok(toDoService.removeToDo(toDoId));
 
     }
+
+    @GetMapping("/{toDoId}/description")
+    public ResponseEntity getToDoDescriptionById(@PathVariable int toDoId) {
+        return ResponseEntity.ok(toDoService.getDescripitionById(toDoId));
+    }
 }

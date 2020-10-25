@@ -3,12 +3,9 @@ package com.accademia.demo.services;
 import com.accademia.demo.entity.ToDo;
 import com.accademia.demo.repository.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ToDoService {
@@ -49,4 +46,12 @@ public class ToDoService {
          }).orElseThrow();
 
      }
+
+    public String getDescripitionById(int toDoId) {
+        return toDoRepository.findById(toDoId).map(t->{
+            return t.getDescription();
+        }).orElseThrow();
+
+
+    }
 }
