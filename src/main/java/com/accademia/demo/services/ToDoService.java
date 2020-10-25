@@ -40,9 +40,9 @@ public class ToDoService {
 
      public ToDo removeToDo(int toDoId) {
          return toDoRepository.findById(toDoId)
-            .map(record -> {
-            toDoRepository.delete(record);
-            return record;
+            .map(t -> {
+            toDoRepository.delete(t);
+            return t;
          }).orElseThrow();
 
      }
